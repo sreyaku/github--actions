@@ -1,1 +1,19 @@
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - development
+    paths:
+      - '**.js'
 
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: windows-latest
+    steps:
+    - run:run: |
+          content=`**.json`
+          echo "::set-output name=packageJson::$content"
+      - run: |
+          echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
