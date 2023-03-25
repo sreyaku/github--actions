@@ -1,1 +1,26 @@
 
+name: Generate HTML from JSON
+on:
+push:
+branches:
+- master
+jobs:
+build:
+runs-on: windows-latest
+steps:
+- name: Checkout code
+uses: actions/checkout@v2
+- name: Install dependencies
+run: npm install
+- name: Generate HTML
+run: |
+node generateHTML.js
+env:
+JSON: ${{ toJson('{"name": "sreya", "age": 25}') }}
+- name: Publish HTML
+uses: actions/upload-artifact@v2
+with:
+name: html-file
+path: |
+index.html
+json.js
