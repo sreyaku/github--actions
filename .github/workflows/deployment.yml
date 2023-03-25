@@ -2,13 +2,13 @@
 name: Build and Deploy
 
 on:
-push:
-branches:
-- development
+  push:
+    branches:
+      - development
 
 jobs:
-build-and-deploy:
-runs-on: windows-latest
+   build-and-deploy:
+   runs-on: windows-latest
 
 steps:
  - name: Checkout repository
@@ -32,4 +32,3 @@ steps:
     git add .
     git commit -m "Generated HTML from JSON"
     git push origin master
-
